@@ -3,27 +3,39 @@ package com.beaiteam.project1beai.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import java.util.List;
+import javax.persistence.*;
 
 @Data
 @Entity
+@Table
 @AllArgsConstructor
 @NoArgsConstructor
-public class DbUser extends BaseEntity{
+public class DbUser{
 
-    @Column(unique = true)
+    @Id
+    @SequenceGenerator(
+            name = "dbUser_sequence",
+            sequenceName = "dbUser_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+    generator = "student_sequence")
+    private Long id;
+    private String name;
+    private int age;
     private String email;
+    private String lvlOfFollow;
+    @OneToOne
+    @JoinColumn(name = "wallet_id")
+    private Wallet wallet;
 
-    private String password;
+    @OneToOne
+    @JoinColumn(name = "music_id")
+    Music music;
 
-    private String username;
+//
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    private List<Role> roles;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles;
 }

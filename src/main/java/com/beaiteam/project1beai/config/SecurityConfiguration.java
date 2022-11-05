@@ -1,6 +1,7 @@
 package com.beaiteam.project1beai.config;
 
 import com.beaiteam.project1beai.services.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -12,14 +13,13 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true, proxyTargetClass = true, securedEnabled = true)
 public class SecurityConfiguration {
 
 //    private final UserService service;
-//
-//    public SecurityConfiguration(UserService service) {
-//        this.service = service;
-//    }
+
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
